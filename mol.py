@@ -27,15 +27,19 @@ def meishi(word):
             
     return meishi_data,n_meishi_data
 
-def main():
+def data():
     words = "リストから項目を追加したり削除したりすること"
     # words = input("文字を入力\n")
     m,nm = meishi(wakati(words))
-    # 何単語目かの出力
-    data = [nm[i] for i in range(0,len(nm),2)]
-    print(data) 
-    
-    print(m,nm)
 
-if __name__=='__main__':
-    main()
+    # 何単語目かの出力
+    m_index = [m[i] for i in range(0,len(m),2)]
+    nm_index = [nm[i] for i in range(0,len(nm),2)]
+
+    #単語の出力
+    m_data = [m[i] for i in range(1,len(m),2)]
+    nm_data = [nm[i] for i in range(1,len(nm),2)]
+
+    # print(m_data,nm_data)
+    # print(m_index,nm_index)
+    return m_data,nm_data,m_index,nm_index
