@@ -5,21 +5,24 @@ class Word_To_Vec():
     """
     word2vec.w2v_data()のみ外部から参照可能
     """
-    def __init__(self,m_datas,nm_datas,m_indexes,nm_indexes):
+    def __init__(self,m_datas,nm_datas,m_indexes,nm_indexes,p_or_n):
         self.m_datas = m_datas
         self.nm_datas = nm_datas
         self.m_indexes = m_indexes
         self.nm_indexes = nm_indexes
-        
+        self.pn = p_or_n
     def __synonym_gene(self):        
         # 同義語の生成と同じ単語が被った時に次に似ている意味の単語を出力
         p_tango = []
         model = gensim.models.Word2Vec.load(r'word2vec_dict\word2vec.gensim.model')
         
         for m_data in self.m_datas:
-            p_results = model.wv.most_similar(m_data,topn = 2)
-            print(p_results)
+            if self.pn == "p":
+                p_results = model.wv.most_similar(positive = m_data,topn = 2)
+            elif self.pn == "n":
+                p_results = model.wv.most_similar(negative = m_data,topn = 2)
             print(m_data)
+            print(p_results)
             for p_result in p_results:
                 if p_result[0] == m_data:
                     continue

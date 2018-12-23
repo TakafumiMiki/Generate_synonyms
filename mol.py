@@ -2,7 +2,7 @@ import MeCab
 
 class mecab():
     """
-    mecab.data()のみ外部から参照可能
+    mecab.data(words)のみ外部から参照可能
     """   
     # 入力された文字に対して形態素解析を行い単語別にする
     def __wakati(self,words):
