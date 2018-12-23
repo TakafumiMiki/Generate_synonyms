@@ -30,5 +30,5 @@ p_bunsyo = ""
 for bun in bunsyo:
     p_bunsyo += bun
 
-print(p_bunsyo)
-
+        print(p_bunsyo)
+    
