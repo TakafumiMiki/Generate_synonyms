@@ -1,12 +1,12 @@
 import MeCab
 
-class mecab():        
+class mecab():
+    """
+    mecab.data()のみ外部から利用可能
+    """   
     # 入力された文字に対して形態素解析を行い単語別にする
     def __wakati(self,words):
-        # m = MeCab.Tagger()
         m = MeCab.Tagger("-Ochasen")
-        # m = MeCab.Tagger("-Owakati")
-        # m = MeCab.Tagger("-Oyomi")
         word = m.parse(words).split("\n")
         return word
 
