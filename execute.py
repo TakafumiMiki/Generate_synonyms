@@ -2,11 +2,13 @@ import w2v
 import mol
 
 def main():
-    words = "リストから項目を追加したり削除したりすること"
+    words = "与えられた文章に対して似た意味と反対の意味を持つ文章を返す"
     mecab = mol.mecab()
     a,b,c,d = mecab.data(words)
     word2vec = w2v.Word_To_Vec(a,b,c,d)
-    word2vec.w2v_data()
+    result = word2vec.w2v_data()
+    print("変換前 -> " + words)
+    print("変換後 -> " + result)
 
 if __name__=='__main__':
     main()

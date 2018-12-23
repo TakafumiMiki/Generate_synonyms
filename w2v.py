@@ -46,8 +46,11 @@ class Word_To_Vec():
         for bun in bunsyo:
             p_bunsyo += bun
 
-        print(p_bunsyo)
+        return p_bunsyo
     
     def w2v_data(self):
-        self.__tango_link(self.__synonym_gene())
+        """
+        単語に対して同義語を用意し、文字番号を従って連結された文章を返す
+        """
+        return self.__tango_link(self.__synonym_gene())
 
