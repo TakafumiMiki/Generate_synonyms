@@ -13,15 +13,16 @@ def meishi(word):
     meishi_data = []
     n_meishi_data = []
     # meishi_datas = [i.split() for i in word if "名詞" in i]
-    for i in word:
-        if "名詞" in i:
-            str1 = i.split()
+    for i,tango in enumerate(word):
+        if "名詞" in tango:
+            str1 = tango.split()
             # str1[0]はそのままの入力文字 str1[1]はカタカナで出力
-            meishi_data.append(str1[0])
-            
-        elif 'EOS' not in i and len(i) != 0:
-            str1 = i.split()
+            meishi_data.append(i)
+            meishi_data.append(str1[0])            
+        elif 'EOS' not in tango and len(tango) != 0:
+            str1 = tango.split()
             # str1[0]はそのままの入力文字 str1[1]はカタカナで出力
+            n_meishi_data.append(i)
             n_meishi_data.append(str1[0])
             
     return meishi_data,n_meishi_data
@@ -30,6 +31,10 @@ def main():
     words = "リストから項目を追加したり削除したりすること"
     # words = input("文字を入力\n")
     m,nm = meishi(wakati(words))
+    # 何単語目かの出力
+    data = [nm[i] for i in range(0,len(nm),2)]
+    print(data) 
+    
     print(m,nm)
 
 if __name__=='__main__':
