@@ -9,7 +9,7 @@
   - pipで mecab-pythonと gensimのインストールを行う
   - execute.pyを実行する
 - モデル作成のために行ったこと
-  - wikipedia(https://dumps.wikimedia.org/jawiki/latest/)からテキストデータを持ってくる
+  - [wikipedia](https://dumps.wikimedia.org/jawiki/latest/)からテキストデータを持ってくる
   - wikiextractorで使いやすいデータにする
   - type text/*/* > jawiki.txtで１つのファイルにまとめる
   - wiki_mol.pyを実行させまとめたファイルに対して形態素解析を行い動詞と名詞の単語をwikidata.txtにまとめる
