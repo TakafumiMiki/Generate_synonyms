@@ -11,6 +11,6 @@
 - モデル作成のために行ったこと
   - [wikipedia](https://dumps.wikimedia.org/jawiki/latest/)からテキストデータを持ってくる
   - [wikiextractor](https://github.com/attardi/wikiextractor)で使いやすいデータにする
-  - type text/*/* > jawiki.txtで１つのファイルにまとめる
+  - ''type text/*/* > jawiki.txt''で１つのファイルにまとめる
   - wiki_mol.pyを実行させまとめたファイルに対して形態素解析を行い動詞と名詞の単語をwikidata.txtにまとめる
   - まとめたファイルに対してword2vecを用いてモデル化する
