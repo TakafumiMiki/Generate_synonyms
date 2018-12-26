@@ -7,5 +7,10 @@
   - 反対の意味を持つ単語を検索するために何かしらをしなくてはいけない(negative="単語"の方法では無理だった)
 - 実行方法
   - pipで mecab-pythonと gensimのインストールを行う
-  - execute.pyを実行する 
-  
+  - execute.pyを実行する
+- モデル作成のために行ったこと
+  - wikipedia(https://dumps.wikimedia.org/jawiki/latest/)からテキストデータを持ってくる
+  - wikiextractorで使いやすいデータにする
+  - type text/*/* > jawiki.txtで１つのファイルにまとめる
+  - wiki_mol.pyを実行させまとめたファイルに対して形態素解析を行い動詞と名詞の単語をwikidata.txtにまとめる
+  - まとめたファイルに対してword2vecを用いてモデル化する
