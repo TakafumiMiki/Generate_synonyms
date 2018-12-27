@@ -1,5 +1,4 @@
 import gensim
-import mol
 
 class Word_To_Vec():
     """
@@ -14,7 +13,7 @@ class Word_To_Vec():
     def __synonym_gene(self):        
         # 同義語の生成と同じ単語が被った時に次に似ている意味の単語を出力
         p_tango = []
-        model = gensim.models.Word2Vec.load(r'word2vec_dict\word2vec.gensim.model')
+        model = gensim.models.Word2Vec.load(r'w2v_model\wiki.model')
         
         for m_data in self.m_datas:
             if self.pn == "p":
