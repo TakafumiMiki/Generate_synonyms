@@ -1,4 +1,5 @@
 import gensim
+from statistics import mode
 
 class Word_To_Vec():
     """
@@ -10,25 +11,42 @@ class Word_To_Vec():
         self.m_indexes = m_indexes
         self.nm_indexes = nm_indexes
         self.pn = p_or_n
-    def __synonym_gene(self):        
+
+    def __synonym_gene(self):
+        # negativeの時にw2vに2回出力させ1度もかぶらなかったワードを出力させる       
         # 同義語の生成と同じ単語が被った時に次に似ている意味の単語を出力
-        p_tango = []
+        p_syugo = []
+        most_tango = []
         model = gensim.models.Word2Vec.load(r'w2v_model\wiki.model')
         
         for m_data in self.m_datas:
-            if self.pn == "p":
-                p_results = model.wv.most_similar(positive = m_data,topn = 2)
-            elif self.pn == "n":
-                p_results = model.wv.most_similar(negative = m_data,topn = 2)
-            print(m_data)
-            print(p_results)
+            p_results = model.wv.most_similar(positive = m_data,topn = 10)
+            # 10このリザルトに対してまたword2vecを利用し関連する10このキーワードを出力させる
             for p_result in p_results:
-                if p_result[0] == m_data:
-                    continue
+                if self.pn == "n":
+                    syugos = model.wv.most_similar(positive= p_result[0],topn = 10)
+
+                    for syugo in syugos:
+                        p_syugo.append(syugo[0])
+                
+                    try: 
+                        most_tango.append(mode(p_syugo))
+                        del p_syugo[:10]
+
+                    except:
+                        most_tango.append(p_syugo[0])
+                        del p_syugo[:10]
+                        break
+
                 else:
-                    p_tango.append(p_result[0])
-                    break
-        return p_tango
+                    if p_result[0] == m_data:
+                        continue
+                    else:
+                        most_tango.append(p_result[0])
+                        break
+                
+        return most_tango
+        # return p_tango
 
     def __tango_link(self,p_tango):
         # 単語と接続語を連結し、文章の作成
