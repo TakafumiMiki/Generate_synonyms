@@ -1,4 +1,4 @@
-# Dwango_report
+# Generate_synonyms
 - 実装内容
   - 与えられた文章に対して似た意味と反対の意味を持つ文章を返す
 - 実装方法
