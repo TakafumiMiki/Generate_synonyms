@@ -41,6 +41,4 @@ class mecab():
         m_data = [m[i] for i in range(1,len(m),2)]
         nm_data = [nm[i] for i in range(1,len(nm),2)]
 
-        # print(m_data,nm_data)
-        # print(m_index,nm_index)
         return m_data,nm_data,m_index,nm_index

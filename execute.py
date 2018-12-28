@@ -2,9 +2,9 @@ import w2v
 import mol
 
 def main():
-    words = "存在しない位置を指定するとエラーになる。"
+    words = "今日の昼食はカレーでした"
     # positiveなら"p" negativeなら"n
-    posi_or_nega = "n"
+    posi_or_nega = "p"
     mecab = mol.mecab()
     a,b,c,d = mecab.data(words)
     word2vec = w2v.Word_To_Vec(a,b,c,d,posi_or_nega)
