@@ -26,7 +26,10 @@ class Word_To_Vec():
         tango_list = self.simulation(words)
         if self.pn == "n":
             negative_list = sorted([x for x in set(tango_list) if tango_list.count(x) == 1], key=tango_list.index)
-            return negative_list[0]
+            try:
+                return negative_list[0]
+            except:
+                return tango_list[-1]
         # 一番多いものを選択(１つもかぶりがないときに元の単語に一番近いものを出力させる)
         else:
             try:
@@ -57,7 +60,7 @@ class Word_To_Vec():
                 
     # 似ている単語の生成
     def generate_synonym(self,words):
-        word = self.model.wv.most_similar(positive = words,topn = 5)
+        word = self.model.wv.most_similar(positive = words,topn = 2)
         return word
 
     def __tango_link(self,p_tango):
