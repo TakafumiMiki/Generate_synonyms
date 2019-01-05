@@ -9,6 +9,7 @@
 - 実行方法
   - pipで mecab-pythonと gensimのインストールを行う
   - execute.pyを実行する
+  - git lfsを利用しているためlfsをインストールする必要がある
 - モデル作成のために行ったこと
   - [wikipedia](https://dumps.wikimedia.org/jawiki/latest/)からテキストデータを持ってくる
   - [wikiextractor](https://github.com/attardi/wikiextractor)で使いやすいデータにする

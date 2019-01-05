@@ -7,7 +7,7 @@ class Word_To_Vec():
     """
     model = gensim.models.Word2Vec.load(r'w2v_model\wiki.model')
     
-    def __init__(self,m_datas,nm_datas,m_indexes,nm_indexes,p_or_n):
+    def __init__(self,m_datas,nm_datas,m_indexes,nm_indexes,p_or_n = "p"):
         self.m_datas = m_datas
         self.nm_datas = nm_datas
         self.m_indexes = m_indexes
@@ -60,7 +60,7 @@ class Word_To_Vec():
                 
     # 似ている単語の生成
     def generate_synonym(self,words):
-        word = self.model.wv.most_similar(positive = words,topn = 2)
+        word = self.model.wv.most_similar(positive = words, topn = 3)
         return word
 
     def __tango_link(self,p_tango):
