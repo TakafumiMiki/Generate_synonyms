@@ -3,7 +3,21 @@ from statistics import mode
 
 class Word_To_Vec():
     """
-    word2vec.w2v_data()のみ外部から参照可能
+    与えられた文字と番号と属性(p_or_n)に対して同義語か対義語を返す
+    
+    parameters
+    ----------
+    m_datas : list
+        名詞の単語
+    nm_datas : list
+        名詞以外の単語
+    m_indexes : list
+        名詞の単語番号
+    nm_indexes : list
+        名詞以外の単語番号
+    p_or_n : str
+        生成する文章を同義語か対義語に設定するパラメータ
+        デフォルトは同義語(p)です。
     """
     model = gensim.models.Word2Vec.load(r'w2v_model\wiki.model')
     
@@ -14,16 +28,17 @@ class Word_To_Vec():
         self.nm_indexes = nm_indexes
         self.pn = p_or_n
 
-    def __synonym_gene(self):
+    def __result_appender(self):
+        # 与えられた名詞に対して同義語をまとめたものを返す
         result_tango = []
         for m_data in self.m_datas:
-            result_tango.append(self.counter(m_data))
+            result_tango.append(self.__counter(m_data))
             
         return result_tango
 
-    # ここではlistの中で一番多い単語を同義語、少ないものを対義語として出力させる
-    def counter(self,words):
-        tango_list = self.simulation(words)
+    def __counter(self,words):
+        # ここではlistの中で一番多い単語を同義語、少ないものを対義語として出力させる
+        tango_list = self.__simulation(words)
         if self.pn == "n":
             negative_list = sorted([x for x in set(tango_list) if tango_list.count(x) == 1], key=tango_list.index)
             try:
@@ -37,18 +52,18 @@ class Word_To_Vec():
             except:
                 return tango_list[0]
 
-    # 生成された単語を3回程度繰り返す
-    # ここで生成された単語が入力された単語と同じ場合は除外するようにしている
-    def simulation(self,words):
+    def __simulation(self,words):
+        # 生成された単語を3回程度繰り返す
+        # ここで生成された単語が入力された単語と同じ場合は除外するようにしている
         positive = []
-        words1 = self.generate_synonym(words)
+        words1 = self.__generate_synonym(words)
         for result in words1:
-            words2 = self.generate_synonym(result[0])
+            words2 = self.__generate_synonym(result[0])
             if result[0] != words:
                 positive.append(result[0])    
             
             for result1 in words2:
-                words3 = self.generate_synonym(result1[0])
+                words3 = self.__generate_synonym(result1[0])
                 if result1[0] != words:
                     positive.append(result1[0])  
             
@@ -58,8 +73,8 @@ class Word_To_Vec():
 
         return positive
                 
-    # 似ている単語の生成
-    def generate_synonym(self,words):
+    def __generate_synonym(self,words):
+        # 似ている単語の生成
         word = self.model.wv.most_similar(positive = words, topn = 3)
         return word
 
@@ -85,7 +100,6 @@ class Word_To_Vec():
     
     def w2v_data(self):
         """
-        単語に対して同義語を用意し、文字番号を従って連結された文章を返す
+        文字番号を従って連結された文章を返す
         """
-        return self.__tango_link(self.__synonym_gene())
-
+        return self.__tango_link(self.__result_appender())

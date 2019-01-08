@@ -4,13 +4,14 @@ class mecab():
     """
     mecab.data(words)のみ外部から参照可能
     """   
-    # 入力された文字に対して形態素解析を行い単語別にする
     def __wakati(self,words):
+        # 入力された文字に対して形態素解析を行い単語別にする
         m = MeCab.Tagger("-Ochasen")
         word = m.parse(words).split("\n")
         return word
 
     def __meishi(self,word):
+        # 名詞と名詞以外の単語を分ける
         meishi_data = []
         n_meishi_data = []
         # meishi_datas = [i.split() for i in word if "名詞" in i]
@@ -31,6 +32,11 @@ class mecab():
     def data(self,words):
         """
         入力された文字に対して形態素解析の結果と文字番号が返り値として出力されます。
+        
+        parameters
+        ----------
+        words : str
+            形態素解析をする文章
         """
         m,nm = self.__meishi(self.__wakati(words))
         # 何単語目かの出力
